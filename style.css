@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'MinOTFFont'; /* Ange det namn du vill använda för typsnittet */
+    src: url('assets/ppneuemontreal-medium.woff') format('woff'); /* Ange sökvägen till din webbfontfil */
+    /* Om du har konverterat till WOFF2 kan du använda format('woff2') */
+}
+/* Reset some default styles */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333; /* Background color of the navbar */
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px; /* Padding for each navbar item */
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: #555; /* Background color on hover */
+}
+
+
+.footer {
+    background-color: #333; /* Background color of the footer */
+    color: white;
+    padding: 20px 0; /* Padding for the content inside the footer */
+    text-align: center;
+}
+
+.container {
+    max-width: 960px; /* Set maximum width for the content */
+    margin: 0 auto; /* Center the content horizontally */
+}
