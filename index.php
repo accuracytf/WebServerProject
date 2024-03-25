@@ -22,7 +22,7 @@ include("functions.php");
             <?php include("components/navbar.php") ?>
         </nav>
         <aside>
-            <?php //include("components/aside.php") ?>
+            <?php include("components/aside.php") ?>
         </aside>
 
     </section>
