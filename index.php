@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "db.php";
 include("functions.php");
 ?>
 <!DOCTYPE html>
@@ -46,11 +47,11 @@ include("functions.php");
             case "logout":
                 include("pages/logout.php");
                 break;
-            case "register":
-                include("pages/register.php");
+            case "addUser":
+                include("pages/addUser.php");
                 break;
-            case "start":
-                include("pages/start.php");
+            case "addPost":
+                include("pages/addPost.php");
                 break;
             default:
                 break;

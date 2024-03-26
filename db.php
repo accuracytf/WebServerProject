@@ -2,7 +2,7 @@
 function connectToDB()
 {
     $dbh = new PDO(
-        "mysql:host=mysql679.loopia.se;dbname=webbkodning_se_db_9;charset=utf8", "milhan@w353525", "Dragonskolan22"
+        "mysql:host=localhost;dbname=twopartnergroup;charset=utf8", "root", "admin"
     );
 
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -12,12 +12,19 @@ function connectToDB()
 }
 function loginUser($dbh){
 
-    if(isset($_POST["password"])&&isset($_POST["username"])){
-        $sql = "SELECT * FROM user WHERE username LIKE :u ORDER BY username";
+    if(isset($_POST["password"])&&isset($_POST["firstname"])){
+        $sql = "SELECT * FROM users WHERE firstname LIKE :f";
         /* Förbereder förfrågan till databasen */
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':u', $_POST["username"]);
+        $stmt->bindValue(':f', $_POST["firstname"]);
         /* Skickar förfrågan till databasen */
+
+
+    }
+    function getPosts($dbh){
+
+        $sql = "SELECT * FROM posts ORDER BY last_date";
+        /* Förbereder förfrågan till databasen */
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if(($stmt->rowCount() == 1) && password_verify((string)$_POST["password"], $row["password"])){
@@ -25,19 +32,10 @@ function loginUser($dbh){
             $_SESSION["user_id"] = $row["user_id"];
             $_SESSION["firstname"] = $row["firstname"];
             $_SESSION["lastname"] = $row["lastname"];
-            $_SESSION["username"] = $row["username"];
             header("location: ../index.php");
         }
     }
-
-
-}
-function getPosts($dbh){
-
-    $sql = "SELECT * FROM post ORDER BY date";
-    /* Förbereder förfrågan till databasen */
     $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':u', $_SESSION['user_id']);
     /* Skickar förfrågan till databasen */
     $stmt->execute();
 
