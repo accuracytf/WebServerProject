@@ -5,7 +5,6 @@ try{
         header("Location: ../index.php");
     }
 
-
     loginUser(connectToDB());
 }
 catch (Exception $e){

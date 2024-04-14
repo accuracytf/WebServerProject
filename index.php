@@ -22,9 +22,6 @@ include("functions.php");
         <nav>
             <?php include("components/navbar.php") ?>
         </nav>
-        <aside>
-            <?php include("components/aside.php") ?>
-        </aside>
 
     </section>
 
