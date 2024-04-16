@@ -9,6 +9,7 @@ include("functions.php");
     <meta charset="UTF-8"/>
     <title>Sessioner</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -56,9 +57,9 @@ include("functions.php");
         ?>
     </section>
 
-    <footer>
-        <?php include("components/footer.php"); ?>
-    </footer>
+    <div>
+        <?php //include("components/footer.php"); ?>
+    </div>
 </div>
 </body>
 </html>

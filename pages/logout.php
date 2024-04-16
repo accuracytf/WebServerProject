@@ -1,16 +1,6 @@
 <?php
-try{
-    if (isset($_SESSION["user_id"]))
-    {
-        header("Location: ../index.php");
-    }
-
-    loginUser(connectToDB());
-}
-catch (Exception $e){
-    echo "Error: " . $e->getMessage();
-}
-
+session_unset();
+session_destroy();
 
 ?>
 <form id="formLogout" action="#" method="post">

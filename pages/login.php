@@ -1,11 +1,12 @@
 <?php
 try{
-    if (isset($_SESSION["user_id"]))
-    {
-        header("Location: ../index.php");
+    if(isset($_SESSION["user_id"])){
+        echo "HEJ";
+    }
+    if(isset($_POST["username"])){
+        loginUser(connectToDB());
     }
 
-    loginUser(connectToDB());
 }
 catch (Exception $e){
     echo "Error: " . $e->getMessage();
@@ -18,7 +19,7 @@ catch (Exception $e){
         <legend>Konto</legend>
         <p>
             Användarnamn <br />
-            <input type="text" placeholder="User123" name="username" required />
+            <input type="text" placeholder="User123" name="firstname" required />
         </p>
         <p>
             Lösenord <br />
@@ -26,9 +27,9 @@ catch (Exception $e){
         </p>
         <input type="submit" value="Logga in" name="login"/>
         <br>
-        <p>
-            <a href="index.php?page=addUser"> Registrera konto </a>
-        </p>
 
     </fieldset>
 </form>
+<p>
+    <a href="index.php?page=addUser"> Registrera konto </a>
+</p>

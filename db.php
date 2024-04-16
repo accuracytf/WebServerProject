@@ -15,7 +15,9 @@ function loginUser($dbh)
 
     if (isset($_POST["password"]) && isset($_POST["firstname"])) {
         $sql = "SELECT * FROM users WHERE firstname LIKE :f";
-        /* Förbereder förfrågan till databasen */
+        echo "HEJ";
+        /* Förbereder f
+        örfrågan till databasen */
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':f', $_POST["firstname"]);
         $stmt->execute(); // Execute the prepared statement
@@ -23,9 +25,6 @@ function loginUser($dbh)
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row && password_verify((string)$_POST["password"], $row["password"])) {
             $_SESSION["user_id"] = $row["user_id"];
-            $_SESSION["loggedIn"] = true; // Set loggedIn session variable
-            header("location: ../index.php");
-            exit(); // Ensure script execution stops after redirection
         }
 
     }
@@ -35,14 +34,6 @@ function loginUser($dbh)
         $sql = "SELECT * FROM posts ORDER BY last_date";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(($stmt->rowCount() == 1)){
-            echo "Hej3";
-            $_SESSION["user_id"] = $row["user_id"];
-            $_SESSION["firstname"] = $row["firstname"];
-            $_SESSION["lastname"] = $row["lastname"];
-            header("location: ../index.php");
-        }
         return $stmt;
     }
 
@@ -50,14 +41,19 @@ function loginUser($dbh)
 
 function addPost($dbh)
 {
+
+    echo "hej22";
     if (isset($_SESSION['user_id'])) {
-        $sql = "INSERT INTO post (`from_user_id`,`to_user_id`, `text`, `date`) VALUES (:u,:id,:t,NOW())";
+        echo "hej2";
+        $sql = "INSERT INTO posts (`user_id`, `title`, `pay`, `last_date`) VALUES (:u,:t,:p,:d)";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':u', $_SESSION['user_id']);
-        $stmt->bindValue(':t', $_POST['post']);
-        $stmt->bindValue(':id', $_POST['users']);
+        $stmt->bindValue(':t', $_POST['title']);
+        $stmt->bindValue(':p', $_POST['pay']);
+        $stmt->bindValue(':d', $_POST['last_date']);
         $stmt->execute();
     }
+
 }
 function getAllUsers($dbh){
     $sql = "SELECT user_id, username FROM user ";
