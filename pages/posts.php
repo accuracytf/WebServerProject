@@ -34,7 +34,7 @@
                                   Apply
                                   </button>';
                             echo '</div>';
-                            
+
                         }
                     }
                     catch(Exception $e){

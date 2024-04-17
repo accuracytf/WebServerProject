@@ -14,22 +14,25 @@ catch (Exception $e){
 
 
 ?>
-<form id="formLogin" action="#" method="post">
+<form id="formLogin" action="#" method="post" class="max-w-md mx-auto bg-white p-8 shadow-md rounded-md">
     <fieldset>
-        <legend>Konto</legend>
-        <p>
-            Användarnamn <br />
-            <input type="text" placeholder="User123" name="firstname" required />
-        </p>
-        <p>
-            Lösenord <br />
-            <input type="password" placeholder="Password" name="password" required />
-        </p>
-        <input type="submit" value="Logga in" name="login"/>
-        <br>
-
+        <legend class="text-lg font-semibold">Konto</legend>
+        <div class="mt-4">
+            <label for="username" class="block mb-1">Användarnamn</label>
+            <input type="text" id="username" placeholder="User123" name="firstname" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mt-4">
+            <label for="password" class="block mb-1">Lösenord</label>
+            <input type="password" id="password" placeholder="Password" name="password" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mt-4">
+            <input type="submit" value="Logga in" name="login"
+                   class="w-full bg-blue-500 text-white py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
+        </div>
     </fieldset>
 </form>
-<p>
-    <a href="index.php?page=addUser"> Registrera konto </a>
+<p class="mt-4 text-center">
+    <a href="index.php?page=addUser" class="text-blue-500 hover:underline">Registrera konto</a>
 </p>
