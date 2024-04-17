@@ -13,8 +13,8 @@ include("functions.php");
 </head>
 <body>
 <div id="wrapper">
-    <h1 style="font-family: 'MinOTFFont', sans-serif;">TwoPartnerGroup</h1>
-    <p style="font-family: 'MinOTFFont', sans-serif;"> HEJ rtabawkjdbapownåoiOWDPOAIWdonåowa</p>
+    <h1 >TwoPartnerGroup</h1>
+    <p> HEJ rtabawkjdbapownåoiOWDPOAIWdonåowa</p>
     <header>
         <?php include("components/header.php") ?>
     </header>
@@ -50,6 +50,9 @@ include("functions.php");
                 break;
             case "addPost":
                 include("pages/addPost.php");
+                break;
+            case "editProfile":
+                include("pages/editProfile.php");
                 break;
             default:
                 break;

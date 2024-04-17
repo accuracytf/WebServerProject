@@ -1,8 +1,5 @@
 <section>
-    <style>h1, h2, h3, h4, h5, h6 { font-family: 'Cabin', sans-serif; --font-sans: 'Cabin'; }
-    </style>
-    <style>body { font-family: 'Cabin', sans-serif; --font-sans: 'Cabin'; }
-    </style>
+
     <div class="w-full py-12 lg:py-16">
         <div class="container grid items-center gap-4 px-4 text-center md:px-6">
             <div class="space-y-2">
@@ -33,7 +30,8 @@
                             echo '<button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
                                   Apply
                                   </button>';
-                            echo '</div>';
+
+
 
                         }
                     }
@@ -42,23 +40,6 @@
                     }
                 }
                 ?>
-            </div>
-            <div class="flex flex-col gap-1 min-[400px]:flex-row justify-center">
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
-                    Apply
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
-                    Apply
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
-                    Apply
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
-                    Apply
-                </button>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">
-                    Apply
-                </button>
             </div>
         </div>
     </div>

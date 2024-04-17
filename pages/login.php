@@ -3,7 +3,7 @@ try{
     if(isset($_SESSION["user_id"])){
         echo "HEJ";
     }
-    if(isset($_POST["username"])){
+    if(isset($_POST["firstname"])){
         loginUser(connectToDB());
     }
 

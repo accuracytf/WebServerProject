@@ -29,19 +29,18 @@ function loginUser($dbh)
 
     }
 }
-    function getPosts($dbh){
+function getPosts($dbh){
 
-        $sql = "SELECT * FROM posts ORDER BY last_date";
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-        return $stmt;
-    }
+    $sql = "SELECT * FROM posts ORDER BY last_date";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute();
+    return $stmt;
+}
 
 
 
 function addPost($dbh)
 {
-
     echo "hej22";
     if (isset($_SESSION['user_id'])) {
         echo "hej2";
@@ -56,8 +55,16 @@ function addPost($dbh)
 
 }
 function getAllUsers($dbh){
-    $sql = "SELECT user_id, username FROM user ";
+    $sql = "SELECT user_id, username FROM users ";
     $stmt = $dbh->prepare($sql);
+    $stmt->execute();
+    return $stmt;
+}
+
+function getUserInfo($dbh){
+    $sql = "SELECT user_id, firstname, lastname, password FROM users WHERE user_id=:u ";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':u', $_SESSION['user_id']);
     $stmt->execute();
     return $stmt;
 }
