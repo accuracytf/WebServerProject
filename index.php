@@ -7,13 +7,13 @@ include("functions.php");
 <html lang="sv">
 <head>
     <meta charset="UTF-8"/>
-    <title>Sessioner</title>
+    <title>TwoPartnerTeam</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div id="wrapper">
-    <h1 >TwoPartnerGroup</h1>
+    <h1 >TwoPartnerTeam</h1>
     <p> HEJ rtabawkjdbapownåoiOWDPOAIWdonåowa</p>
     <header>
         <?php include("components/header.php") ?>

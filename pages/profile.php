@@ -15,7 +15,7 @@ $profileData = array(
 
 
     <!-- View Profile Section -->
-    <section class="profile-view bg-white shadow-md rounded-md p-6">
+    <section class="profile-view bg-gray-100 shadow-md rounded-md p-6">
         <h2 class="text-xl font-semibold mb-4">View Profile</h2>
         <div class="mb-4">
             <label for="viewUsername" class="block font-medium mb-1">Username:</label>

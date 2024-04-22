@@ -1,7 +1,7 @@
 <?php
 try{
     if(isset($_SESSION["user_id"])){
-        echo "HEJ";
+        echo "Redan Inloggad";
     }
     if(isset($_POST["firstname"])){
         loginUser(connectToDB());

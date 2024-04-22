@@ -15,7 +15,7 @@ function loginUser($dbh)
 
     if (isset($_POST["password"]) && isset($_POST["firstname"])) {
         $sql = "SELECT * FROM users WHERE firstname LIKE :f";
-        echo "HEJ";
+        echo "Inloggad";
         /* Förbereder f
         örfrågan till databasen */
         $stmt = $dbh->prepare($sql);
@@ -31,7 +31,7 @@ function loginUser($dbh)
 }
 function getPosts($dbh){
 
-    $sql = "SELECT * FROM posts ORDER BY last_date";
+    $sql = "SELECT * FROM posts, users ORDER BY last_date";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     return $stmt;
