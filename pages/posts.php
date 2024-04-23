@@ -80,14 +80,14 @@
                             echo '        </p>';
                             echo '        <div class="flex items-center space-x-2 text-sm">';
                             echo '            <img';
-                            echo '                    src="/placeholder.svg"';
+                            echo '                    src="' . $row['img_src'] . '"';
                             echo '                    width="32"';
                             echo '                    height="32"';
                             echo '                    alt="Acme Corporation"';
                             echo '                    class="rounded-full"';
                             echo '                    style="aspect-ratio: 32 / 32; object-fit: cover;"';
                             echo '            />';
-                            echo '            <span>' . $row['firstname'] . '</span>';
+                            echo '            <span>' .  $row["firstname"]  . '</span>';
                             echo '        </div>';
                             echo '        <div class="flex items-center space-x-2 text-sm">';
                             echo '            <svg';

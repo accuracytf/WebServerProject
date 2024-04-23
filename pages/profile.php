@@ -1,8 +1,7 @@
 <?php
 // Assume $profileData is an array containing profile information
 
-$stmt = getUserInfo(connectToDB());
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$row = getUserInfo(connectToDB(), $_SESSION['user_id']);
 
 $profileData = array(
     'firstname' => $row['firstname'],

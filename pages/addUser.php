@@ -21,6 +21,11 @@
             <input type="password" id="password" placeholder="Password" name="password" required
                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
         </div>
+        <div class="mt-4">
+            <label for="img" class="block mb-1">Profilbild</label>
+            <input type="text" id="img" placeholder="img" name="img" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+        </div>
         <div class="mt-6">
             <input type="submit" value="Registrera"
                    class="w-full bg-blue-500 text-white py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
@@ -33,12 +38,13 @@ try {
     if (isset($_POST["firstname"])) {
         $dbh = connectToDB();
         if (strlen($_POST["firstname"]) > 3 && strlen($_POST["password"]) > 3) {
-            $sql = "INSERT INTO users (firstname, lastname, password, is_employer) VALUES (:f,:l,:p,:e)";
+            $sql = "INSERT INTO users (firstname, lastname, password, is_employer, img_src) VALUES (:f,:l,:p,:e,:i)";
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':f', Clear($_POST["firstname"]));
             $stmt->bindValue(':l', Clear($_POST["lastname"]));
             $stmt->bindValue(':e', $_POST["isEmployer"]);
             $stmt->bindValue(':p', password_hash(Clear($_POST["password"]), PASSWORD_DEFAULT));
+            $stmt->bindValue(':i', $_POST["img"]);
             if ($stmt->execute()) {
                 echo "Användaren har registrerats";
             }

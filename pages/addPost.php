@@ -12,8 +12,13 @@ if(isset($_POST["title"])){
                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400">
         </div>
         <div>
-            <label for="pay" class="block mb-2 text-lg font-semibold text-gray-800">Lön</label>
-            <input type="text" id="pay" name="pay" placeholder="Ange lön"
+            <label for="bio" class="block mb-2 text-lg font-semibold text-gray-800">Beskrivning</label>
+            <input type="text" id="bio" name="bio" placeholder="Beskrivning"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400">
+        </div>
+        <div>
+            <label for="location" class="block mb-2 text-lg font-semibold text-gray-800">Plats</label>
+            <input type="text" id="location" name="location" placeholder="Location"
                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400">
         </div>
         <div>

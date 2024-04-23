@@ -31,7 +31,11 @@ function loginUser($dbh)
 }
 function getPosts($dbh){
 
-    $sql = "SELECT * FROM posts, users ORDER BY last_date";
+    $sql = "SELECT posts.*, users.firstname, users.img_src
+            FROM posts
+            INNER JOIN user_post ON posts.post_id = user_post.post_id
+            INNER JOIN users ON user_post.user_id = users.user_id
+            ORDER BY posts.last_date";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     return $stmt;
@@ -41,16 +45,20 @@ function getPosts($dbh){
 
 function addPost($dbh)
 {
-    echo "hej22";
     if (isset($_SESSION['user_id'])) {
-        echo "hej2";
-        $sql = "INSERT INTO posts (`user_id`, `title`, `pay`, `last_date`) VALUES (:u,:t,:p,:d)";
+        $sql = "INSERT INTO posts (`title`, `bio`, `location`, `last_date`) VALUES (:t, :b, :l, :d)";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':u', $_SESSION['user_id']);
         $stmt->bindValue(':t', $_POST['title']);
-        $stmt->bindValue(':p', $_POST['pay']);
+        $stmt->bindValue(':b', $_POST['bio']);
+        $stmt->bindValue(':l', $_POST['location']);
         $stmt->bindValue(':d', $_POST['last_date']);
         $stmt->execute();
+        $post_id = $dbh->lastInsertId(); // Get the last inserted ID
+        $sql_user_post = "INSERT INTO user_post (`user_id`, `post_id`) VALUES (:u, :p)";
+        $stmt_user_post = $dbh->prepare($sql_user_post);
+        $stmt_user_post->bindValue(':u', $_SESSION['user_id']);
+        $stmt_user_post->bindValue(':p', $post_id);
+        $stmt_user_post->execute();
     }
 
 }
@@ -61,11 +69,11 @@ function getAllUsers($dbh){
     return $stmt;
 }
 
-function getUserInfo($dbh){
-    $sql = "SELECT user_id, firstname, lastname, password FROM users WHERE user_id=:u ";
+function getUserInfo($dbh, $id){
+    $sql = "SELECT * FROM users WHERE user_id=:u ";
     $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':u', $_SESSION['user_id']);
+    $stmt->bindValue(':u', $id);
     $stmt->execute();
-    return $stmt;
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
