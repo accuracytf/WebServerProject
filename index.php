@@ -55,6 +55,7 @@ include("functions.php");
                 include("pages/editProfile.php");
                 break;
             default:
+                include("pages/home.php");
                 break;
         }
         ?>

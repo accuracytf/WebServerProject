@@ -1,6 +1,6 @@
 <?php
 
-getUserInfo(connectToDB());
+getUserInfo(connectToDB(), $_SESSION['user_id']);
 
 echo '<main class="container mx-auto px-4 py-8">
     <section class="profile bg-white shadow-md rounded-md p-6">
