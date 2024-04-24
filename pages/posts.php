@@ -87,7 +87,8 @@
                             echo '                    class="rounded-full"';
                             echo '                    style="aspect-ratio: 32 / 32; object-fit: cover;"';
                             echo '            />';
-                            echo '            <span>' .  $row["firstname"]  . '</span>';
+                            echo '            <span>' .  $row["firstname"] . " " .
+                                $row["lastname"] . '</span>';
                             echo '        </div>';
                             echo '        <div class="flex items-center space-x-2 text-sm">';
                             echo '            <svg';

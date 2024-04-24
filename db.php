@@ -31,7 +31,7 @@ function loginUser($dbh)
 }
 function getPosts($dbh){
 
-    $sql = "SELECT posts.*, users.firstname, users.img_src
+    $sql = "SELECT posts.*, users.firstname, users.img_src, users.lastname
             FROM posts
             INNER JOIN user_post ON posts.post_id = user_post.post_id
             INNER JOIN users ON user_post.user_id = users.user_id

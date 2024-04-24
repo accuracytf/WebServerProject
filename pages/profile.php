@@ -11,8 +11,6 @@ $profileData = array(
 ?>
 
 <main class="container mx-auto px-4 py-8">
-
-
     <!-- View Profile Section -->
     <section class="profile-view bg-gray-100 shadow-md rounded-md p-6">
         <h2 class="text-xl font-semibold mb-4">View Profile</h2>
