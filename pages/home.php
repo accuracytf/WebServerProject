@@ -2,7 +2,7 @@
 ?>
 <header class="bg-white py-8">
     <div class="container mx-auto px-4">
-        <h1 class="text-3xl text-gray-900 font-semibold">Welcome to TwoPartnerGroup</h1>
+        <h1 class="text-3xl text-gray-900 font-semibold">Welcome to TwoPartnerTeam</h1>
         <p class="text-lg text-gray-600">Find Your Next Career Move</p>
     </div>
 </header>

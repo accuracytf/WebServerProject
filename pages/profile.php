@@ -1,13 +1,14 @@
 <?php
 // Assume $profileData is an array containing profile information
+if(isset($_SESSION['user_id'])){
+    $row = getUserInfo(connectToDB(), $_SESSION['user_id']);
 
-$row = getUserInfo(connectToDB(), $_SESSION['user_id']);
-
-$profileData = array(
-    'firstname' => $row['firstname'],
-    'lastname' => $row['lastname'],
-    'password' => $row['password']
-);
+    $profileData = array(
+        'firstname' => $row['firstname'],
+        'lastname' => $row['lastname'],
+        'password' => $row['password']
+    );
+}
 ?>
 
 <main class="container mx-auto px-4 py-8">
