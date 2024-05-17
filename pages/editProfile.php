@@ -26,7 +26,7 @@ echo '<main class="container mx-auto px-4 py-8">
                 <textarea id="bio" name="bio" rows="4"
                           class="border border-gray-300 rounded-md py-2 px-3 w-full"></textarea>
             </div>
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Save Changes</button>
+            <button type="submit" class="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-blue-600">Save Changes</button>
         </form>
     </section>
 </main>';

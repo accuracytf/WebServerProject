@@ -28,7 +28,7 @@ if(isset($_POST["title"])){
         </div>
         <div>
             <input type="submit" value="Lägg till inlägg"
-                   class="w-full bg-blue-500 text-white py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
+                   class="w-full bg-gray-900 text-gray-50 py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
         </div>
     </form>
 </article>

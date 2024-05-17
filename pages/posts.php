@@ -60,6 +60,14 @@
                         <span class="underline">Back to all jobs</span>
                     </a>
                 </div>
+                <div class="flex flex-col gap-2 min-[400px]:flex-row">
+                    <a
+                            class="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
+                            href="index.php?page=addPost"
+                    >
+                        Add New Post
+                    </a>
+                </div>
             </div>
             <div class="grid grid-cols-2 gap-8">
                 <?php
@@ -68,88 +76,7 @@
 
                         $dbh = connectToDB();
                         $stmt = getPosts($dbh);
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-                        {
-                            echo '<div class="rounded-lg border text-card-foreground shadow-sm bg-gray-100" data-v0-t="card">';
-                            echo '    <div class="p-6 grid gap-1.5 h-full">';
-                            echo '        <h3 class="whitespace-nowrap font-semibold tracking-tight text-base line-clamp-2">';
-                            echo '            <span>' . $row['title'] . '</span>';
-                            echo '        </h3>';
-                            echo '        <p class="text-sm text-muted-foreground line-clamp-4">';
-                            echo '            <span>' . $row['bio'] . '</span>';
-                            echo '        </p>';
-                            echo '        <div class="flex items-center space-x-2 text-sm">';
-                            echo '            <img';
-                            echo '                    src="' . $row['img_src'] . '"';
-                            echo '                    width="32"';
-                            echo '                    height="32"';
-                            echo '                    alt="Acme Corporation"';
-                            echo '                    class="rounded-full"';
-                            echo '                    style="aspect-ratio: 32 / 32; object-fit: cover;"';
-                            echo '            />';
-                            echo '            <span>' .  $row["firstname"] . " " .
-                                $row["lastname"] . '</span>';
-                            echo '        </div>';
-                            echo '        <div class="flex items-center space-x-2 text-sm">';
-                            echo '            <svg';
-                            echo '                    xmlns="http://www.w3.org/2000/svg"';
-                            echo '                    width="24"';
-                            echo '                    height="24"';
-                            echo '                    viewBox="0 0 24 24"';
-                            echo '                    fill="none"';
-                            echo '                    stroke="currentColor"';
-                            echo '                    stroke-width="2"';
-                            echo '                    stroke-linecap="round"';
-                            echo '                    stroke-linejoin="round"';
-                            echo '                    class="w-4 h-4 opacity-50"';
-                            echo '            >';
-                            echo '                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>';
-                            echo '                <circle cx="12" cy="10" r="3"></circle>';
-                            echo '            </svg>';
-                            echo '            <span>' . $row['location'] . '</span>';
-                            echo '        </div>';
-                            echo '        <div class="flex items-center space-x-2 text-sm">';
-                            echo '            <svg';
-                            echo '                    xmlns="http://www.w3.org/2000/svg"';
-                            echo '                    width="24"';
-                            echo '                    height="24"';
-                            echo '                    viewBox="0 0 24 24"';
-                            echo '                    fill="none"';
-                            echo '                    stroke="currentColor"';
-                            echo '                    stroke-width="2"';
-                            echo '                    stroke-linecap="round"';
-                            echo '                    stroke-linejoin="round"';
-                            echo '                    class="w-4 h-4 opacity-50"';
-                            echo '            >';
-                            echo '                <circle cx="12" cy="12" r="10"></circle>';
-                            echo '                <polyline points="12 6 12 12 16 14"></polyline>';
-                            echo '            </svg>';
-                            echo '            <span>' . $row['last_date'] . '</span>';
-                            echo '        </div>';
-                            echo '        <div class="flex items-center space-x-2 text-sm">';
-                            echo '            <svg';
-                            echo '                    xmlns="http://www.w3.org/2000/svg"';
-                            echo '                    width="24"';
-                            echo '                    height="24"';
-                            echo '                    viewBox="0 0 24 24"';
-                            echo '                    fill="none"';
-                            echo '                    stroke="currentColor"';
-                            echo '                    stroke-width="2"';
-                            echo '                    stroke-linecap="round"';
-                            echo '                    stroke-linejoin="round"';
-                            echo '                    class="w-4 h-4 opacity-50"';
-                            echo '            >';
-                            echo '                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />';
-                            echo '            </svg>';
-                            echo '            <span>Favorite</span>'; // Placeholder for the star icon
-                            echo '        </div>';
-                            echo '    </div>';
-                            echo '</div>';
-
-
-
-
-                        }
+                        CreatePost($stmt);
                     }
                     catch(Exception $e){
                         echo "Error: " . $e->getMessage();
@@ -159,6 +86,6 @@
             </div>
         </div>
     </div>
-    <a href="index.php?page=addPost">Hej<a/>
+
 
 </section>

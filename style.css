@@ -8,94 +8,32 @@ body, ul {
     margin: 0;
     padding: 0;
 }
-#wrapper {
-    min-height: 100%;
-    position: relative;
-}
+
 h1, h2, h3, h4, h5, h6 { font-family: 'MinOTFFont', sans-serif;}
 
 body { font-family: 'MinOTFFont', sans-serif; }
 
 
-footer {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-.navbar {
-    background-color: #333; /* Background color of the navbar */
-}
-
-.navbar ul {
-    list-style-type: none;
+input[type="color"] {
+    appearance: none;
+    border-radius: 50%;
     padding: 0;
+    cursor: pointer;
+    background-color: transparent;
 }
 
-.navbar li {
-    display: inline;
+/* Specific styling for the color swatch */
+input[type="color"]::-moz-color-swatch {
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
-.navbar li a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px; /* Padding for each navbar item */
-    text-decoration: none;
+input[type="color"]::-ms-color-swatch {
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
-.navbar li a:hover {
-    background-color: #555; /* Background color on hover */
-}
-
-
-.footer {
-    background-color: #333; /* Background color of the footer */
-    color: white;
-    padding: 20px 0; /* Padding for the content inside the footer */
-    text-align: center;
-}
-
-.container {
-    max-width: 960px; /* Set maximum width for the content */
-    margin: 0 auto; /* Center the content horizontally */
-}
-
-/* Styles for the article section */
-#articleLeft {
-    float: left;
-    width: 70%;
-    padding-right: 20px;
-}
-
-/* Styles for the posts */
-.box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Styles for the post title */
-.box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-/* Styles for the post content */
-.box p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-/* Styles for the date */
-.box .date {
-    font-style: italic;
-    color: #666;
+input[type="color"]::-webkit-color-swatch {
+    border: 1px solid black;
+    border-radius: 50%;
 }

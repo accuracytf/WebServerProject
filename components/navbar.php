@@ -5,7 +5,7 @@
 // https://v0.dev/t/VNdetBkHDIW
 -->
 
-<nav class="bg-gray-900 py-4 px-6">
+<nav class="bg-gray-900 py-4 px-6 sticky top-0 z-50">
     <div class="flex items-center justify-between">
         <div class="flex space-x-6 text-white">
             <a class="flex items-center hover:text-gray-400" href="index.php">
@@ -123,15 +123,19 @@
                     aria-expanded="false"
                     data-state="closed"
             >
-                <img
-                        src="/placeholder.svg"
-                        width="32"
-                        height="32"
-                        class="rounded-full"
-                        alt="Avatar"
-                        style="aspect-ratio: 32 / 32; object-fit: cover;"
-                />
-                <span class="sr-only">Toggle user menu</span>
+                <?php
+                if(isset($_SESSION["user_id"])){
+                    $row = getUserColor(connectToDB(), $_SESSION["user_id"]);
+
+                    // Output the SVG code with the retrieved color
+                    echo '<svg width="32" height="32" viewBox="0 0 32 32" class="rounded-full" fill="' . $row["img_color"] . '">';
+                    echo '<circle cx="16" cy="16" r="15" />';
+                    echo '</svg>';
+                    echo '<span class="sr-only">Toggle user menu</span>';
+                }
+
+                ?>
+
             </button>
         </div>
     </div>
