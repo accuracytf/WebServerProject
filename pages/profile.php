@@ -1,20 +1,28 @@
 <?php
-// Assume $profileData is an array containing profile information
-if(isset($_SESSION['user_id'])){
-    $row = getUserInfo(connectToDB(), $_SESSION['user_id']);
+try{
+    if(isset($_SESSION['user_id'])){
+        $row = getUserInfo(connectToDB(), $_SESSION['user_id']);
 
-    $profileData = array(
-        'firstname' => $row['firstname'],
-        'lastname' => $row['lastname'],
-        'password' => $row['password'],
-        'img_color' => $row['img_color']
-    );
+        $profileData = array(
+            'firstname' => $row['firstname'],
+            'lastname' => $row['lastname'],
+            'password' => $row['password'],
+            'img_color' => $row['img_color']
+        );
+    }
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        DeletePost($_POST['post_id']);
+    }
+}
+catch (Exception $e){
+    echo "Error: " . $e->getMessage();
 }
 
 ?>
 
 <main class="container mx-auto px-4 py-8">
-    <!-- View Profile Section -->
+    <!-- profil info -->
     <section class="profile-view bg-gray-100 shadow-md rounded-md p-6">
         <h2 class="text-xl font-semibold mb-4">View Profile</h2>
         <div class="mb-4">
@@ -62,33 +70,15 @@ if(isset($_SESSION['user_id'])){
     <section>
         <h2 class="text-xl font-semibold mb-4">Your Posts</h2>
         <?php
-        if(true){
-            try{
+        //visar dina posts
+        try{
 
-                $dbh = connectToDB();
-                $stmt = getProfilePosts($dbh);
-                CreatePost($stmt);
-            }
-            catch(Exception $e){
-                echo "Error: " . $e->getMessage();
-            }
+            $dbh = connectToDB();
+            $stmt = getProfilePosts($dbh);
+            YourPosts($stmt);
         }
-        ?>
-    </section>
-    <br>
-    <section>
-        <h2 class="text-xl font-semibold mb-4">Your Favorites</h2>
-        <?php
-        if(true){
-            try{
-
-                $dbh = connectToDB();
-                $stmt = getProfilePosts($dbh);
-                CreatePost($stmt);
-            }
-            catch(Exception $e){
-                echo "Error: " . $e->getMessage();
-            }
+        catch(Exception $e){
+            echo "Error: " . $e->getMessage();
         }
         ?>
     </section>

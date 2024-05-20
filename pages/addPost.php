@@ -1,9 +1,11 @@
 <?php
+//addpost kod
 if(isset($_POST["title"])){
     echo "Hej44";
     addPost(connectToDB());
 }
 ?>
+<!-- Hela addPost page -->
 <article class="max-w-md mx-auto bg-gray-100 p-8 shadow-md rounded-md">
     <form method="post" action="#" class="space-y-4">
         <div>

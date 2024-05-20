@@ -1,3 +1,6 @@
+<!--
+posts sidan
+-->
 <section>
 
     <div class="w-full py-12 lg:py-16">
@@ -13,53 +16,79 @@
             </div>
         </div>
     </div>
-    <!--
-// v0 by Vercel.
-// https://v0.dev/t/4KMs8Z1PAf4
--->
 
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="grid gap-12 lg:grid-cols-2 lg:gap-8 items-start">
             <div class="space-y-12">
-                <div class="space-y-2">
-                    <h1 class="text-3xl font-bold">Customer Support Representative</h1>
-                    <p class="text-sm leading-none">at Acme Corporation</p>
-                </div>
-                <div class="space-y-2 text-base text-gray-500">
-                    <p class="line-clamp-6">
-                        Acme Corporation is looking for a dedicated Customer Support Representative to join our team. The ideal
-                        candidate will be responsible for managing customer inquiries via phone, email, and chat, providing timely
-                        and accurate information while ensuring the highest level of customer satisfaction. The role will also
-                        involve identifying and escalating priority issues to management and following up with customers to ensure
-                        their issues are resolved.
-                    </p>
-                    <p>
-                        <strong>Location:</strong> Remote (US-based)
-                    </p>
-                    <p>
-                        <strong>Date Posted:</strong> March 23, 2024
-                    </p>
-                </div>
-                <div class="mt-12">
-                    <a class="flex items-center" href="#">
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="w-4 h-4 mr-1.5"
-                        >
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                        <span class="underline">Back to all jobs</span>
-                    </a>
-                </div>
+                <?php
+                try{
+                    if (isset($_POST['post_id'])) {
+                        $dbh = ConnectToDB();
+                        $post_id = $_POST['post_id'];
+
+                        // tar alla posts
+                        $sql = "SELECT posts.*
+                    FROM posts 
+                    WHERE posts.post_id = :post_id";
+                        $stmt = $dbh->prepare($sql);
+                        $stmt->bindValue(':post_id', $post_id);
+                        $stmt->execute();
+
+
+                        //visar detaljer för det post du clickat på
+                        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<div class="grid gap-12 lg:grid-cols-2 lg:gap-8 items-start">';
+                            echo '    <div class="space-y-12">';
+                            echo '        <div class="space-y-2">';
+                            echo '            <h1 class="text-3xl font-bold">' . $row['title']. '</h1>';
+                            echo '            <p class="text-sm leading-none">at Acme Corporation</p>';
+                            echo '        </div>';
+                            echo '        <div class="space-y-2 text-base text-gray-500">';
+                            echo '            <p class="line-clamp-6">';
+                            echo                $row['bio'];
+                            echo '            </p>';
+                            echo '            <p>';
+                            echo '                <strong>Location: </strong>' .  $row['location'];
+                            echo '            </p>';
+                            echo '            <p>';
+                            echo '                <strong>Date Posted:</strong> '.$row['last_date'];
+                            echo '            </p>';
+                            echo '        </div>';
+                            echo '    </div>';
+                            echo '</div>';
+
+                        }
+                    }
+                    //visar en place holder för detaljerna för ett post
+                    else{
+                        echo '<div class="grid gap-12 lg:grid-cols-2 lg:gap-8 items-start">';
+                        echo '    <div class="space-y-12">';
+                        echo '        <div class="space-y-2">';
+                        echo '            <h1 class="text-3xl font-bold"> Find a job</h1>';
+                        echo '            <p class="text-sm leading-none">at Acme Corporation</p>';
+                        echo '        </div>';
+                        echo '        <div class="space-y-2 text-base text-gray-500">';
+                        echo '            <p class="line-clamp-6">';
+                        echo                'a job at acme corporation' ;
+                        echo '            </p>';
+                        echo '            <p>';
+                        echo '                <strong>Location: Toledo</strong>';
+                        echo '            </p>';
+                        echo '            <p>';
+                        echo '                <strong>Date Posted: last-date</strong> ';
+                        echo '            </p>';
+                        echo '        </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                }
+                catch(Exception $e){
+                    echo "Error: " . $e->getMessage();
+                }
+
+
+
+                ?>
                 <div class="flex flex-col gap-2 min-[400px]:flex-row">
                     <a
                             class="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
@@ -71,6 +100,7 @@
             </div>
             <div class="grid grid-cols-2 gap-8">
                 <?php
+                //skapar alla posts
                 if(true){
                     try{
 

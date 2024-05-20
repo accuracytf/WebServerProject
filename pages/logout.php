@@ -1,4 +1,8 @@
+<!--
+Hela logout html
+-->
 <?php
+//loggar ut ifall
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     session_unset();
     session_destroy();
@@ -16,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="p-6 space-y-4">
                 <input
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+                        class="inline-flex bg-gray-900 text-gray-50 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
                         type="submit"
                         value="Log out"
                 >

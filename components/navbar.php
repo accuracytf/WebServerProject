@@ -1,8 +1,7 @@
 
 
 <!--
-// v0 by Vercel.
-// https://v0.dev/t/VNdetBkHDIW
+Navbar html
 -->
 
 <nav class="bg-gray-900 py-4 px-6 sticky top-0 z-50">
@@ -66,6 +65,7 @@
                 Profil
             </a>
             <?php
+            //varierar mellan "logga in" och "logga ut" beronde på ifall du är inloggad eller inte
             if (isset($_SESSION["user_id"])) {
                 echo '<a class="flex items-center hover:text-gray-400"  href="index.php?page=logout">
                 <svg
@@ -86,7 +86,7 @@
                     <path d="M10 12v.01"></path>
                     <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"></path>
                 </svg>
-                Logga ut
+                Log out
             </a>';
             }
             else {
@@ -109,7 +109,7 @@
                     <path d="M10 12v.01"></path>
                     <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"></path>
                 </svg>
-                Logga in
+                Log in
             </a>';
             }
             ?>
@@ -124,6 +124,7 @@
                     data-state="closed"
             >
                 <?php
+                //sätter profilbildsfärgen i hörnet av navbaren
                 if(isset($_SESSION["user_id"])){
                     $row = getUserColor(connectToDB(), $_SESSION["user_id"]);
 

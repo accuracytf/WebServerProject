@@ -1,5 +1,8 @@
+
+
 <?php
 try{
+    //inloggings kod
     if(isset($_SESSION["user_id"])){
         echo "Redan Inloggad";
     }
@@ -14,13 +17,11 @@ catch (Exception $e){
 
 
 ?>
-
 <!--
-// v0 by Vercel.
-// https://v0.dev/t/Drg0KSbLX8h
+hela login html
 -->
 
-<form method="post" class="mx-auto max-w-md">
+<form method="post" class="mx-auto max-w-md mt-12">
     <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
         <div class="flex flex-col space-y-1.5 p-6">
             <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Login</h3>
@@ -86,5 +87,5 @@ catch (Exception $e){
 </form>
 
 <p class="mt-4 text-center">
-    <a href="index.php?page=addUser" class="text-gray-900 hover:underline">Registrera konto</a>
+    <a href="index.php?page=addUser" class="text-gray-900 hover:underline">Register Account</a>
 </p>
