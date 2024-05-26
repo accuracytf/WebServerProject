@@ -15,8 +15,8 @@ if(isset($_POST["title"])){
         </div>
         <div>
             <label for="bio" class="block mb-2 text-lg font-semibold text-gray-800">Beskrivning</label>
-            <input type="text" id="bio" name="bio" placeholder="Beskrivning"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400">
+            <textarea id="bio" name="bio" placeholder="Beskrivning"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400" rows="4"></textarea>
         </div>
         <div>
             <label for="location" class="block mb-2 text-lg font-semibold text-gray-800">Plats</label>

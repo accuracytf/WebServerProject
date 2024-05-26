@@ -5,12 +5,14 @@
             <div class="flex flex-col justify-center space-y-4">
                 <div class="space-y-2">
                     <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                        Customer Support Representative
+                        TwoPartnerGroup
                     </h1>
                     <p class="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                        Acme Corporation is looking for a dedicated Customer Support Representative to join our team. The ideal
-                        candidate will be responsible for managing customer inquiries via phone, email, and chat, providing
-                        timely and accurate information while ensuring the highest level of customer satisfaction.
+                        TwoPartnerGroup offers comprehensive hiring services designed to connect businesses with top-tier talent across various industries.
+                        As a leading provider in the recruitment sector, TwoPartnerGroup specializes in sourcing, screening,
+                        and placing highly qualified candidates to meet the unique needs of each client.
+                        Our approach is tailored to ensure a seamless and efficient hiring process,
+                        leveraging the latest technology and industry best practices to deliver exceptional results.
                     </p>
                 </div>
                 <div class="flex flex-col gap-2 min-[400px]:flex-row">

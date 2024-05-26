@@ -57,6 +57,7 @@ posts sidan
                             echo '    </div>';
                             echo '</div>';
 
+
                         }
                     }
                     //visar en place holder för detaljerna för ett post

@@ -3,12 +3,10 @@ function connectToDB()
 {
     //ansluter till databasen
     $dbh = new PDO(
-        "mysql:host=mysql679.loopia.se;dbname=webbkodning_se_db_9;charset=utf8", "milhan@w353525", "Dragonskolan22"
+        "mysql:host=mysql679.loopia.se;dbname=webbkodning_se_db_9;charset=utf8mb4", "milhan@w353525", "Dragonskolan22"
     );
-
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
     return $dbh;
 }
 function loginUser($dbh)
@@ -17,7 +15,6 @@ function loginUser($dbh)
     if (isset($_POST["password"]) && isset($_POST["firstname"]) && isset($_POST["lastname"])) {
         try{
             $sql = "SELECT * FROM users WHERE firstname LIKE :f AND lastname LIKE :l";
-            echo "Inloggad";
             /* Förbereder förfrågan till databasen */
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':f', Sanitizer::sanitizeString($_POST["firstname"]));
@@ -27,6 +24,7 @@ function loginUser($dbh)
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row && password_verify(Sanitizer::sanitizeString($_POST["password"]), Sanitizer::sanitizeString($row["password"]))) {
                 $_SESSION["user_id"] = $row["user_id"];
+                echo "Inloggad";
             }
         }
         catch (Exception $e) {
@@ -141,8 +139,53 @@ function CreatePost($stmt) {
         echo '<input type="hidden" name="post_id" value="' . $row['post_id'] . '">';
         echo '<input class="text-blue-500 underline" type="submit" value="view details">';
         echo '</form>';
+        echo '
+                <!-- Button to open the modal -->
+                <div class="mt-8 text-center">
+                    <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Apply for Job</button>
+                </div>
+                
+                <!-- The Modal -->
+                <div id="applyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white p-8 rounded-md shadow-md w-full max-w-lg">
+                        <h2 class="text-2xl font-semibold mb-4">Job Application</h2>
+                        <form method="post" action="pages/sendApplication.php" class="space-y-4">
+                            <div>
+                                <label for="applicant_email" class="block mb-2 text-lg font-semibold text-gray-800">Email</label>
+                                <input type="email" id="applicant_email" name="applicant_email" placeholder="Your Email" required
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400">
+                            </div>
+                            <div>
+                                <label for="applicant_message" class="block mb-2 text-lg font-semibold text-gray-800">Message</label>
+                                <textarea id="applicant_message" name="applicant_message" placeholder="Your Message" 
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-gray-800 placeholder-gray-400" rows="4"></textarea>
+                            </div>
+                            <div>
+                                <input type="submit" value="Submit Application"
+                                       class="w-full bg-gray-900 text-gray-50 py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
+                            </div>
+                            <div class="text-right">
+                                <button type="button" onclick="closeModal()" class="text-gray-500 hover:text-gray-900">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <script>
+                    function openModal() {
+                        document.getElementById(\'applyModal\').classList.remove(\'hidden\');
+                    }
+                
+                    function closeModal() {
+                        document.getElementById(\'applyModal\').classList.add(\'hidden\');
+                    }
+                </script>
+                ';
         echo '    </div>';
         echo '</div>';
+
+
+
 
     }
 }
@@ -206,30 +249,7 @@ function DeletePost($id){
 }
 
 function AddUser(){
-    //lägger till en användare
-    $dbh = connectToDB();
-    $token = $_POST['csrf'];
-    if (!validateCsrfToken($token)) {
-        die('Invalid CSRF token');
-    }
-    $_SESSION["csrf"]=generateCsrfToken();
-    if (strlen($_POST["firstname"]) > 3 && strlen($_POST["password"]) > 3) {
-        $sql = "INSERT INTO users (firstname, lastname, password, is_employer, img_color) VALUES (:f,:l,:p,:e,:i)";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':f', Sanitizer::sanitizeString($_POST["firstname"]));
-        $stmt->bindValue(':l', Sanitizer::sanitizeString($_POST["lastname"]));
-        if(isset($_POST['isEmployer'])){
-            $stmt->bindValue(':e', true);
-        }
-        else{
-            $stmt->bindValue(':e', false);
-        }
-        $stmt->bindValue(':p', password_hash(Sanitizer::sanitizeString($_POST["password"])), PASSWORD_DEFAULT);
-        $stmt->bindValue(':i', $_POST["colorPicker"]);
-        if ($stmt->execute()) {
-            echo "Användaren har registrerats";
-        }
-    }
+
 }
 ?>
 

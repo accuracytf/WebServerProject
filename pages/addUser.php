@@ -49,7 +49,29 @@
 try {
     //lägger till en användare
     if (isset($_POST["firstname"])) {
-        AddUser();
+        $dbh = connectToDB();
+        $token = $_POST['csrf'];
+        if (!validateCsrfToken($token)) {
+            die('Invalid CSRF token');
+        }
+        $_SESSION["csrf"]=generateCsrfToken();
+        if (strlen($_POST["firstname"]) > 3 && strlen($_POST["password"]) > 3) {
+            $sql = "INSERT INTO users (firstname, lastname, password, is_employer, img_color) VALUES (:f,:l,:p,:e,:i)";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':f', Sanitizer::sanitizeString($_POST["firstname"]));
+            $stmt->bindValue(':l', Sanitizer::sanitizeString($_POST["lastname"]));
+            if(isset($_POST['isEmployer'])){
+                $stmt->bindValue(':e', true);
+            }
+            else{
+                $stmt->bindValue(':e', false);
+            }
+            $stmt->bindValue(':p', password_hash($_POST["password"], PASSWORD_DEFAULT));
+            $stmt->bindValue(':i', $_POST["colorPicker"]);
+            if ($stmt->execute()) {
+                echo "Användaren har registrerats";
+            }
+        }
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
