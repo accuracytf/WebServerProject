@@ -11,8 +11,13 @@ try{
         );
     }
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if($_SESSION["is_employer"] == 1){
+            DeletePost($_POST['post_id']);
+        }
+        else{
+            DeleteApplication($_POST['post_id']);
+        }
 
-        DeletePost($_POST['post_id']);
     }
 }
 catch (Exception $e){
@@ -68,14 +73,23 @@ catch (Exception $e){
     </section>
     <br>
     <section>
-        <h2 class="text-xl font-semibold mb-4">Your Posts</h2>
+
         <?php
         //visar dina posts
         try{
-
             $dbh = connectToDB();
-            $stmt = getProfilePosts($dbh);
-            YourPosts($stmt);
+            if($_SESSION["is_employer"] == 1){
+                echo '<h2 class="text-xl font-semibold mb-4">Your Posts</h2>';
+                $stmt = getProfilePosts($dbh);
+                YourPosts($stmt);
+            }
+            else if($_SESSION["is_employer"] == 0){
+                echo '<h2 class="text-xl font-semibold mb-4">Post you have applied to</h2>';
+                $stmt = getAppliedPosts($dbh);
+                YourApplication($stmt);
+            }
+
+
         }
         catch(Exception $e){
             echo "Error: " . $e->getMessage();

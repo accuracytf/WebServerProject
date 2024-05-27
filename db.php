@@ -24,6 +24,7 @@ function loginUser($dbh)
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row && password_verify(Sanitizer::sanitizeString($_POST["password"]), Sanitizer::sanitizeString($row["password"]))) {
                 $_SESSION["user_id"] = $row["user_id"];
+                $_SESSION["is_employer"] = $row["is_employer"];
                 echo "Inloggad";
             }
         }
@@ -60,6 +61,20 @@ function getProfilePosts($dbh){
     return $stmt;
 }
 
+function getAppliedPosts($dbh){
+    $sql = "SELECT posts.*, application.*, u1.*, user_post.*, u2.*
+            FROM posts
+            INNER JOIN application ON application.post_id = posts.post_id
+            INNER JOIN users u1 ON u1.user_id = application.user_id
+            INNER JOIN user_post ON posts.post_id = user_post.post_id
+            INNER JOIN users u2 ON user_post.user_id = u2.user_id
+            WHERE application.user_id = :id
+            ORDER BY posts.last_date";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':id', $_SESSION['user_id']);
+    $stmt->execute();
+    return $stmt;
+}
 
 
 function addPost($dbh)
@@ -164,6 +179,7 @@ function CreatePost($stmt) {
                                 <input type="submit" value="Submit Application"
                                        class="w-full bg-gray-900 text-gray-50 py-2 rounded-md cursor-pointer transition duration-300 hover:bg-blue-600">
                             </div>
+                            <input type="hidden" name="post_id" value="' . $row['post_id'] . '">
                             <div class="text-right">
                                 <button type="button" onclick="closeModal()" class="text-gray-500 hover:text-gray-900">Close</button>
                             </div>
@@ -221,11 +237,47 @@ function YourPosts($stmt) {
         echo '            </svg>';
         echo '            <span>' . htmlspecialchars($row['last_date']) . '</span>';
         echo '        </div>';
+        echo '<form method="post" action="#">';
+        echo '<input type="hidden" name="post_id" value="' . $row['post_id'] . '">';
+        echo '<input class="text-red-500 underline" type="submit" value="Delete">';
+        echo '</form>';
+        echo '    </div>';
+        echo '</div>';
+        echo'<br>';
+
+    }
+}
+
+function YourApplication($stmt) {
+    //visar applications i din profil
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo '<div class="rounded-lg border text-card-foreground shadow-sm bg-gray-100" data-v0-t="card">';
+        echo '    <div class="p-6 grid gap-1.5 h-full">';
+        echo '        <h3 class="whitespace-nowrap font-semibold tracking-tight text-base line-clamp-2">';
+        echo '            <span>' . htmlspecialchars($row['title']) . '</span>';
+        echo '        </h3>';
+        echo '        <p class="text-sm text-muted-foreground line-clamp-4">';
+        echo '            <span>' . htmlspecialchars($row['bio']) . '</span>';
+        echo '        </p>';
+        echo '        <div class="flex items-center space-x-2 text-sm">';
+        echo '            <svg width="32" height="32" viewBox="0 0 32 32" class="rounded-full">';
+        echo '                <circle cx="16" cy="16" r="15" fill="' . htmlspecialchars($row["img_color"]) . '"></circle>';
+        echo '            </svg>';
+        echo '            <span>' . htmlspecialchars($row["firstname"]) . " " . htmlspecialchars($row["lastname"]) . '</span>';
+        echo '        </div>';
         echo '        <div class="flex items-center space-x-2 text-sm">';
         echo '            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 opacity-50">';
-        echo '                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>';
+        echo '                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>';
+        echo '                <circle cx="12" cy="10" r="3"></circle>';
         echo '            </svg>';
-        echo '            <span>Favorite</span>'; // Placeholder for the star icon
+        echo '            <span>' . htmlspecialchars($row['location']) . '</span>';
+        echo '        </div>';
+        echo '        <div class="flex items-center space-x-2 text-sm">';
+        echo '            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 opacity-50">';
+        echo '                <circle cx="12" cy="12" r="10"></circle>';
+        echo '                <polyline points="12 6 12 12 16 14"></polyline>';
+        echo '            </svg>';
+        echo '            <span>' . htmlspecialchars($row['last_date']) . '</span>';
         echo '        </div>';
         echo '<form method="post" action="#">';
         echo '<input type="hidden" name="post_id" value="' . $row['post_id'] . '">';
@@ -238,18 +290,25 @@ function YourPosts($stmt) {
     }
 }
 
+
 function DeletePost($id){
     //tar bort ett post
     $dbh = ConnectToDB();
     $sql = "DELETE FROM posts WHERE post_id = :id";
     $stmt = $dbh->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $success = $stmt->execute();
-    return $success;
+    return $stmt->execute();
 }
 
-function AddUser(){
-
+function DeleteApplication($id){
+    //tar bort en application
+    $dbh = ConnectToDB();
+    $sql = "DELETE FROM application WHERE post_id = :id AND user_id = :ui";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':ui', $_SESSION["user_id"], PDO::PARAM_INT);
+    return $stmt->execute();
 }
+
 ?>
 
